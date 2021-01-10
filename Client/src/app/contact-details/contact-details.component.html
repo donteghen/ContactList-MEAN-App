@@ -1,0 +1,31 @@
+<div class="container-fluid">
+    <div class="bg-primary text-center" style="font-size:50px ;">Contact Details</div>
+    <div class="contanier">
+        <form [formGroup]='form'  (ngSubmit) = "save()">
+            <div class="form-group" hidden>
+                <label>
+                    _id:</label>
+                    <input class="form-control" type="text" formControlName="_id"  rquired>
+            </div>
+            <div class="form-group">
+                <label>
+                    First Name:</label>
+                    <input class="form-control" type="text" formControlName="firstName"  rquired>
+            </div>
+            <div class="form-group">
+              <label>
+                Last Name:</label>
+                <input class="form-control" type="text" formControlName="lastName"  required>
+            </div>
+            <div class="form-group">
+              <label>
+                Phone Number:</label>
+                <input class="form-control" type="text" formControlName="phoneNumber"  required>
+            </div>
+            <div class="mt-2">
+                <button class="btn btn-warning mr-4" routerLink="/contacts" >Cancel</button>
+                <button class="btn btn-primary mr-4" type="submit" [disabled]="form.invalid">Save</button>
+            </div>
+        </form>
+    </div>
+</div>

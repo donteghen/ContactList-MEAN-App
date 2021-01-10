@@ -1,0 +1,59 @@
+<div class="container-fliud">
+  <h3 class="text-center bg-light">My Contact Repository</h3>
+    <div *ngIf="!contacts"  class="bg-warning"> No contacts founds!</div>
+    <div *ngIf="contacts.length > 0">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">First Name</th>
+                  <th scope="col">Last Name</th>
+                  <th scope="col">Phone</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor = 'let contact of contacts; let i = index'>
+                  <th scope="row">{{i+1}}</th>
+                  <td>{{contact.firstName}}</td>
+                  <td>{{contact.lastName}}</td>
+                  <td>{{contact.phoneNumber}}</td>
+                  <td>
+                    <button class="btn btn-warning mr-2" (click)="checkId(contact._id)" routerLink="/contacts/{{contact._id}}"><i class="fas fa-edit"></i></button>
+                    <button class="btn btn-danger mr-2" (click)="deleteContact(contact._id)"><i class="fas fa-trash-alt"></i></button>
+                  </td>
+                </tr>
+        </table>
+    </div>
+    <div class="mb-4 text-center bg-light" [hidden]="creating">
+      <h3>Add a new contact</h3>
+      <button class="btn btn-primary" (click)="addContact()"><i class="fas fa-address-book"></i> Add Contact</button>
+    </div>
+    <div class="container" [hidden]="!creating">
+      <h3>Use the form below to create a new contact</h3>
+      <form #form="ngForm" (ngSubmit)="save(form)">
+
+        <div class="form-group">
+          <label for="firstName">First Name:</label>
+            <input type="text" class="form-control" id="firstName" name="firstName" #firstName="ngModel"
+             [(ngModel)]= "firstName.value" required>
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Last Name:</label>
+            <input type="text" class="form-control" id="lastName" name="lastName" #lastName="ngModel"
+             [(ngModel)]= "lastName.value" required>
+        </div>
+
+        <div class="form-group">
+          <label for="phoneNumber">Phone Number:</label>
+            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" #phoneNumber="ngModel"
+             [(ngModel)]= "phoneNumber.value" required>          
+        </div>
+        <div class="mt-2 mb-4 text-center">
+          <button class="btn btn-warning mr-4" (click)="cancelContact(form)" >Cancel</button>
+          <button class="btn btn-primary mr-4" type="submit" [disabled]="form.invalid">Save</button>
+        </div>
+      </form>
+    </div>
+</div>
